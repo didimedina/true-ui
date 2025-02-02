@@ -1,0 +1,1 @@
+export { type SystemStyleObject } from "./panda-codegen/types";
