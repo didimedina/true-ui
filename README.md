@@ -1,50 +1,117 @@
-# React + TypeScript + Vite
+# Formulaic UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React component library built with modern styling patterns and motion capabilities.
 
-Currently, two official plugins are available:
+## Core Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: UI framework
+- **TypeScript**: Type safety and developer experience
+- **Panda CSS**: Zero-runtime CSS-in-JS styling system
+- **Framer Motion**: Animation library
+- **Ark UI**: Unstyled, accessible components
 
-## Expanding the ESLint configuration
+## Key Concepts
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Element System (`el`)
 
-- Configure the top-level `parserOptions` property like this:
+The `el` factory combines Ark UI's accessibility features with Framer Motion's animation capabilities:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```tsx
+import { el } from '@formulaic/components/element'
+// Basic usage
+<el.div animate={{ opacity: 0 }} />
+// With Ark UI props
+<el.button onClick={handler} asChild>
+{children}
+</el.button>
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Styling System
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+We use Panda CSS with some custom abstractions for consistent styling:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
+```tsx
+import { createStyles, mergeStyles } from '@formulaic/styles'
+// Create reusable style variants
+const buttonStyles = createStyles({
+base: {
+// Base styles
+},
+variants: {
+size: {
+sm: { / ... / },
+md: { / ... / }
+}
+}
 })
+// Use in components
+<Component className={buttonStyles({ size: 'sm' })} />
 ```
+
+### Style Utilities
+
+- `createStyles()`: Create style variants with type-safe props
+- `mergeStyles()`: Combine multiple style objects
+- `mergeClasses()`: Combine className strings
+
+### Component Patterns
+
+Components follow these patterns:
+
+1. Use the `el` factory for base elements
+2. Style variants defined with `createStyles`
+3. Accept an optional `addStyles` prop for style overrides
+4. Forward refs when needed
+
+Example:
+
+```tsx
+type ButtonProps = {
+  styleVariant?: StyleVariantProps<typeof buttonStyles>;
+  addStyles?: SystemStyleObject;
+};
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const { styleVariant, addStyles, ...rest } = props;
+    return (
+      <el.button
+        ref={ref}
+        className={mergeStyles(buttonStyles(styleVariant), addStyles)}
+        {...rest}
+      />
+    );
+  }
+);
+```
+
+## Development
+
+1. Install dependencies:
+
+```bash
+pnpm install
+```
+
+2. Start dev server:
+
+```bash
+pnpm dev
+```
+
+3. Build:
+
+```bash
+pnpm build
+```
+
+## Project Structure
+```bash
+src/
+-- @formulaic/
+---- components/ # React components
+---- styles/ # Styling system
+------ panda-codegen/ # Generated Panda CSS files (don't edit directly)
+```
+
+## Project Owner
+- [@didimedina](https://github.com/didimedina)
