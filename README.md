@@ -1,4 +1,4 @@
-# Formulaic UI
+# 🧮 Formulaic UI
 
 A React component library built with modern styling patterns and motion capabilities.
 
@@ -105,6 +105,7 @@ pnpm build
 ```
 
 ## Project Structure
+
 ```bash
 src/
 -- @formulaic/
@@ -114,4 +115,5 @@ src/
 ```
 
 ## Project Owner
+
 - [@didimedina](https://github.com/didimedina)
