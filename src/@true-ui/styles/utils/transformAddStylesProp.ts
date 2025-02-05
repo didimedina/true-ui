@@ -91,7 +91,7 @@ export function transformAddStylesProp(content: string): string {
 
 // const testContent = `
 //   <Button
-//     addStyles={{ bg: "pink", _hover: { bg: "blue" }}, css.raw({ bg: "blue"})}
+//     addStyles={[{ bg: "pink", _hover: { bg: "blue" }}, css.raw({ bg: "blue"})]}
 //     other="props"
 //   />
 // `;

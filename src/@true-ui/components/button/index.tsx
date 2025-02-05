@@ -1,17 +1,11 @@
-import {
-  el,
-  type FormulaicElProps,
-} from "@true-ui/components/element";
-import {
-  createStyles,
-  type StyleVariantProps,
-} from "@true-ui/styles";
+import { el, type FormulaicElProps } from "@true-ui/components/element";
+import { createStyles, type StyleVariantProps } from "@true-ui/styles";
 import { forwardRef } from "react";
 
 const buttonStyleVariants = createStyles({
   base: {
     boxSizing: "border-box",
-    fontFamily: "sans",
+    // fontFamily: "sans",
     fontWeight: "medium",
     backgroundClip: "padding-box",
     display: "flex",
@@ -40,6 +34,7 @@ const buttonStyleVariants = createStyles({
     color: {
       base: { colorPalette: "base" },
       amber: { colorPalette: "amber" },
+      red: { colorPalette: "red" },
       grass: { colorPalette: "grass" },
       violet: { colorPalette: "violet" },
       pink: { colorPalette: "pink" },
@@ -97,14 +92,9 @@ type ButtonProps = FormulaicElProps<"button"> & {
   loading?: boolean;
 };
 
-
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
-    const {
-      styleVariant,
-      addStyles,
-       ...rest
-    } = props;
+    const { styleVariant, addStyles, ...rest } = props;
 
     return (
       <el.button

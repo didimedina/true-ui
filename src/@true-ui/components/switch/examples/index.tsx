@@ -172,7 +172,7 @@ export function BasicSwitchWithSlotsExample() {
 
   const slotStyles = switchStyles({
     state: checked ? "on" : "off",
-    size: "md",
+    size: "xs",
     color: "grass",
     shape: "box",
   });
