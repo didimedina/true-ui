@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@formulaic": path.resolve(__dirname, "./src/@formulaic"),
+      "@true-ui": path.resolve(__dirname, "./src/@true-ui"),
     },
   },
 });

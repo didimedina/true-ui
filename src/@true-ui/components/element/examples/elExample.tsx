@@ -1,5 +1,5 @@
-import { el } from "@formulaic/components/element";
-import { createStyles } from "@formulaic/styles";
+import { el } from "@true-ui/components/element/index[dep]";
+import { createStyles } from "@true-ui/styles";
 import { useState } from "react";
 
 const switchContainerStyles = createStyles({
@@ -43,7 +43,7 @@ export function ElExampleWithMotion() {
   const toggleSwitch = () => setIsOn(!isOn);
 
   return (
-    <el.button
+    <el.span
       className={switchContainerStyles({ state: isOn ? "on" : "off" })}
       onClick={toggleSwitch}
     >
@@ -56,6 +56,7 @@ export function ElExampleWithMotion() {
           bounce: 0.2,
         }}
       />
-    </el.button>
+    </el.span>
   );
 }
+

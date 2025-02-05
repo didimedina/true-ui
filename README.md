@@ -1,4 +1,4 @@
-# 🧮 Formulaic UI
+# 🧮 True-UI
 
 A React component library built with modern styling patterns and motion capabilities.
 
@@ -14,14 +14,19 @@ A React component library built with modern styling patterns and motion capabili
 
 ### Element System (`el`)
 
-The `el` factory combines Ark UI's accessibility features with Framer Motion's animation capabilities:
+The `el` factory combines Ark UI's asChild feature with Framer Motion's animation capabilities:
 
 ```tsx
 import { el } from '@formulaic/components/element'
+
 // Basic usage
+<el.div/>
+
+// With Framer Motion props
 <el.div animate={{ opacity: 0 }} />
+
 // With Ark UI props
-<el.button onClick={handler} asChild>
+<el.button asChild>
 {children}
 </el.button>
 ```
@@ -34,15 +39,15 @@ We use Panda CSS with some custom abstractions for consistent styling:
 import { createStyles, mergeStyles } from '@formulaic/styles'
 // Create reusable style variants
 const buttonStyles = createStyles({
-base: {
-// Base styles
-},
-variants: {
-size: {
-sm: { / ... / },
-md: { / ... / }
-}
-}
+  base: {
+    // Base styles
+  },
+  variants: {
+    size: {
+      sm: { /* ... */ },
+      md: { /* ... */ }
+    }
+  }
 })
 // Use in components
 <Component className={buttonStyles({ size: 'sm' })} />

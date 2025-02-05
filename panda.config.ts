@@ -1,6 +1,6 @@
 import { defineConfig } from "@pandacss/dev";
-import preset from "./src/@formulaic/styles/preset";
-import { transformAddStylesProp } from "./src/@formulaic/styles/utils";
+import preset from "./src/@true-ui/styles/preset";
+import { transformAddStylesProp } from "./src/@true-ui/styles/utils";
 
 export default defineConfig({
   // Whether to use css reset
@@ -18,7 +18,8 @@ export default defineConfig({
           .replace(/mergeStyles/g, "css")
           .replace(/mergeClasses/g, "cx")
           .replace(/createStyles/g, "cva")
-          
+          .replace(/createSlotStyles/g, "sva")
+
           // Replace the import paths
           // replaces */styles → */styles/panda-codegen/css
           // example: import { something } from '@formulaic/styles' → import { something } from '@formulaic/styles/panda-codegen/css'
@@ -42,6 +43,5 @@ export default defineConfig({
   },
 
   // The output directory for your css system
-  outdir: "./src/@formulaic/styles/panda-codegen",
+  outdir: "./src/@true-ui/styles/panda-codegen",
 });
-

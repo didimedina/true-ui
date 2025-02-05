@@ -1,7 +1,6 @@
-import { Button } from "@formulaic/components/button";
-import { ElExampleWithMotion } from "@formulaic/components/element/examples/demo";
-import { createStyles, mergeStyles } from "@formulaic/styles";
-
+import { Button } from "@true-ui/components/button";
+import { BasicSwitchWithSlotsExample } from "@true-ui/components/switch/examples/switch-example";
+import { createStyles, mergeStyles } from "@true-ui/styles";
 const divStyles = createStyles({
   base: {
     display: "flex",
@@ -9,6 +8,7 @@ const divStyles = createStyles({
     alignItems: "center",
     w: "100vw",
     h: "100vh",
+    gap: "8px",
   },
 }).raw();
 
@@ -16,26 +16,12 @@ function App() {
   return (
     <>
       <div className={mergeStyles(divStyles, { bg: "base.3" })}>
-        <ElExampleWithMotion />
+        {/* <BasicSwitchExample /> */}
+        <BasicSwitchWithSlotsExample />
         <Button
-          styleVariant={{
-            size: "sm",
-            color: "violet",
-            affordance: "secondary",
-            // ghost: true,
-            // iconOnly: true,
-          }}
-          addStyles={{ gap: "8px" }}
+          styleVariant={{ size: "md", affordance: "secondary", color: "grass" }}
         >
-          <div
-            className={mergeStyles({
-              h: "12px",
-              w: "12px",
-              bg: "colorPalette.1",
-              rounded: "full",
-            })}
-          />
-          click me!
+          Submit for Review
         </Button>
       </div>
     </>

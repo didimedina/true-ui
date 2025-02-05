@@ -1,12 +1,12 @@
-import { type SystemStyleObject } from "@formulaic/styles";
-import { forwardRef } from "react";
+import {
+  el,
+  type FormulaicElProps,
+} from "@true-ui/components/element";
 import {
   createStyles,
-  mergeClasses,
-  mergeStyles,
   type StyleVariantProps,
-} from "../../styles";
-import { el, type FormulaicElProps } from "../element";
+} from "@true-ui/styles";
+import { forwardRef } from "react";
 
 const buttonStyleVariants = createStyles({
   base: {
@@ -94,22 +94,22 @@ const buttonStyleVariants = createStyles({
 
 type ButtonProps = FormulaicElProps<"button"> & {
   styleVariant?: StyleVariantProps<typeof buttonStyleVariants>;
-  addStyles?: SystemStyleObject;
   loading?: boolean;
 };
 
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
-    const { styleVariant, addStyles, className, ...rest } = props;
+    const {
+      styleVariant,
+      addStyles,
+       ...rest
+    } = props;
 
     return (
       <el.button
         ref={ref}
-        className={mergeClasses(
-          mergeStyles(buttonStyleVariants.raw(styleVariant || {}), addStyles),
-          "some-tw-class",
-          className
-        )}
+        addStyles={[buttonStyleVariants.raw(styleVariant || {}), addStyles]}
         {...rest}
       >
         {props.children}
@@ -117,5 +117,3 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
-
-// type StyleVariantAPI = React.ComponentProps<typeof Button>['styleVariant']
