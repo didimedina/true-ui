@@ -17,7 +17,7 @@ A React component library built with modern styling patterns and motion capabili
 The `el` factory combines Ark UI's asChild feature with Framer Motion's animation capabilities:
 
 ```tsx
-import { el } from '@formulaic/components/element'
+import { el } from '@true-ui/components/element'
 
 // Basic usage
 <el.div/>
@@ -36,7 +36,7 @@ import { el } from '@formulaic/components/element'
 We use Panda CSS with some custom abstractions for consistent styling:
 
 ```tsx
-import { createStyles, mergeStyles } from '@formulaic/styles'
+import { createStyles, mergeStyles } from '@true-ui/styles'
 // Create reusable style variants
 const buttonStyles = createStyles({
   base: {
@@ -113,7 +113,7 @@ pnpm build
 
 ```bash
 src/
--- @formulaic/
+-- @true-ui/
 ---- components/ # React components
 ---- styles/ # Styling system
 ------ panda-codegen/ # Generated Panda CSS files (don't edit directly)
