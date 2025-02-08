@@ -1,6 +1,10 @@
 import { Field, useFieldContext } from "@ark-ui/react/field";
 import { Portal } from "@ark-ui/react/portal";
-import { Select, createListCollection } from "@ark-ui/react/select";
+import {
+  Select,
+  createListCollection,
+  type ListCollection,
+} from "@ark-ui/react/select";
 import { el, type TrueElProps } from "@true-ui/components/element";
 import {
   createStyles,
@@ -9,7 +13,7 @@ import {
 } from "@true-ui/styles";
 import { dataAttr } from "@zag-js/dom-query";
 import { mergeProps } from "@zag-js/react";
-import { forwardRef, useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 
 const inputStyles = createStyles({
   base: {
@@ -47,7 +51,7 @@ const inputStyles = createStyles({
       },
     },
     size: {
-      xs: { height: "16px", px: "4px", fontSize: "xs", lineHeight: "none" },
+      xs: { height: "16px", px: "4px", fontSize: "xs" },
       sm: { height: "24px", px: "6px", fontSize: "sm" },
       base: { height: "32px", px: "8px", fontSize: "base" },
       lg: { height: "40px", px: "12px", fontSize: "lg" },
@@ -81,7 +85,7 @@ const inputStyles = createStyles({
       framed: false,
       css: {
         bg: "colorPalette.A3",
-        _hover: { bg: "colorPalette.A5" },
+        _hover: { bg: "colorPalette.A4" },
         _focusVisible: {
           bg: "colorPalette.A4",
         },
@@ -284,3 +288,132 @@ export function FieldWithSelectExample() {
     </div>
   );
 }
+
+export const FieldWithSelectExample2 = (props: Field.RootProps) => {
+  const collection = createListCollection({ items: ["React", "Solid", "Vue"] });
+
+  return (
+    <Field.Root {...props}>
+      <Select.Root collection={collection}>
+        {/* <Select.Label>Label</Select.Label> */}
+        <Select.Control>
+          <Select.Trigger>
+            <Select.ValueText
+              placeholder="Select a Framework"
+              className={mergeStyles(
+                inputStyles.raw({ affordance: "secondary", size: "xs" }),
+                { display: "flex", alignItems: "center" }
+              )}
+            ></Select.ValueText>
+            <Select.Indicator>↓</Select.Indicator>
+          </Select.Trigger>
+        </Select.Control>
+        <Select.Positioner>
+          <Select.Content>
+            {collection.items.map((item) => (
+              <Select.Item key={item} item={item}>
+                <Select.ItemText>{item}</Select.ItemText>
+                <Select.ItemIndicator>✓</Select.ItemIndicator>
+              </Select.Item>
+            ))}
+          </Select.Content>
+        </Select.Positioner>
+        <Select.HiddenSelect />
+      </Select.Root>
+      {/* <Field.HelperText>Additional Info</Field.HelperText> */}
+      {/* <Field.ErrorText>Error Info</Field.ErrorText> */}
+    </Field.Root>
+  );
+};
+
+// function filterListCollection<T>(
+//   collection: ListCollection<T>,
+//   searchQuery: string
+// ): T[] {
+//   if (!searchQuery) return collection.items;
+//   return collection.items.filter((item) => {
+//     const itemString = collection.stringifyItem(item);
+//     return itemString?.toLowerCase().includes(searchQuery.toLowerCase());
+//   });
+// }
+
+// export const SearchableSelect = () => {
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [isOpen, setIsOpen] = useState(false);
+//   const inputRef = useRef<HTMLInputElement>(null);
+//   const collection = createListCollection({
+//     items: ["React", "Solid", "Vue", "Svelte", "Angular", "Preact"],
+//   });
+
+//   const filteredItems = filterListCollection(collection, searchQuery);
+
+//   return (
+//     <Select.Root
+//       collection={collection}
+//       // onOpenChange={({ open }) => setIsOpen(open)}
+//       onOpenChange={({ open }) => {
+//         setIsOpen(open);
+//         if (open) {
+//           requestAnimationFrame(() => {
+//             inputRef.current?.focus();
+//           });
+//         }
+//       }}
+//       onValueChange={() => setSearchQuery("")}
+//     >
+//       <Select.Label>Framework</Select.Label>
+//       <Select.Control>
+//         <Select.Trigger>
+//           {isOpen ? (
+//             <input
+//               ref={inputRef}
+//               placeholder="Search frameworks..."
+//               value={searchQuery}
+//               onChange={(e) => setSearchQuery(e.target.value)}
+//               onClick={(e) => e.stopPropagation()}
+//               // onKeyDown={(e) => e.stopPropagation()}
+//               onKeyDown={(e) => {
+//                 // Only stop propagation for non-navigation keys
+//                 if (e.key !== "ArrowDown" && e.key !== "ArrowUp") {
+//                   e.stopPropagation();
+//                 }
+//               }}
+//               style={{
+//                 border: "none",
+//                 outline: "none",
+//                 width: "100%",
+//                 background: "transparent",
+//               }}
+//             />
+//           ) : (
+//             <Select.ValueText placeholder="Select a Framework" />
+//           )}
+//           <Select.Indicator>↓</Select.Indicator>
+//         </Select.Trigger>
+//         <Select.ClearTrigger>Clear</Select.ClearTrigger>
+//       </Select.Control>
+//       <Portal>
+//         <Select.Positioner>
+//           <Select.Content>
+//             <Select.ItemGroup>
+//               <Select.ItemGroupLabel>Frameworks</Select.ItemGroupLabel>
+//               {filteredItems.length === 0 ? (
+//                 <div style={{ padding: "8px", color: "#666" }}>
+//                   No results found
+//                 </div>
+//               ) : (
+//                 filteredItems.map((item) => (
+//                   <Select.Item key={item} item={item}>
+//                     <Select.ItemText>{item}</Select.ItemText>
+//                     <Select.ItemIndicator>✓</Select.ItemIndicator>
+//                   </Select.Item>
+//                 ))
+//               )}
+//             </Select.ItemGroup>
+//           </Select.Content>
+//         </Select.Positioner>
+//       </Portal>
+//       <Select.HiddenSelect />
+//     </Select.Root>
+//   );
+// };

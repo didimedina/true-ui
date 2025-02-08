@@ -1,5 +1,8 @@
 import { Button } from "@true-ui/components/button";
-import { FieldWithSelectExample } from "@true-ui/components/field/_wip/v01";
+import {
+  FieldWithSelectExample,
+  FieldWithSelectExample2,
+} from "@true-ui/components/field/_wip/v01";
 
 import { createStyles, mergeStyles } from "@true-ui/styles";
 // import { transformAddStylesProp } from "@true-ui/styles/utils";
@@ -19,7 +22,8 @@ function App() {
     <>
       <div className={mergeStyles(divStyles, { bg: "base.1" })}>
         {/* <BasicSwitchWithSlotsExample /> */}
-        <FieldWithSelectExample />
+        {/* <FieldWithSelectExample /> */}
+        <FieldWithSelectExample2 />
         <Button
           styleVariant={{ size: "md", affordance: "tertiary", color: "base" }}
         >
