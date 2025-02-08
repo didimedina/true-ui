@@ -1,3 +1,5 @@
+// colors are superset of radix color system, learn more here:
+// https://www.radix-ui.com/colors
 export const colors = {
   current: { value: "currentColor" },
   black: { value: "#000" },

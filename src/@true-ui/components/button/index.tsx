@@ -1,4 +1,4 @@
-import { el, type FormulaicElProps } from "@true-ui/components/element";
+import { el, type TrueElProps } from "@true-ui/components/element";
 import { createStyles, type StyleVariantProps } from "@true-ui/styles";
 import { forwardRef } from "react";
 
@@ -68,7 +68,7 @@ const buttonStyleVariants = createStyles({
       },
       tertiary: {
         bg: "colorPalette.A3",
-        color: "colorPalette.12",
+        color: "colorPalette.11",
         _hover: { bg: "colorPalette.A4" },
       },
     },
@@ -87,7 +87,7 @@ const buttonStyleVariants = createStyles({
   },
 });
 
-type ButtonProps = FormulaicElProps<"button"> & {
+type ButtonProps = TrueElProps<"button"> & {
   styleVariant?: StyleVariantProps<typeof buttonStyleVariants>;
   loading?: boolean;
 };

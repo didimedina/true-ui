@@ -195,7 +195,7 @@ export interface UtilityValues {
 	debug: boolean;
 	containerName: CssProperties["containerName"];
 	colorPalette: "current" | "black" | "white" | "transparent" | "base" | "amber" | "orange" | "red" | "pink" | "violet" | "indigo" | "cyan" | "jade" | "grass";
-	textStyle: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl" | "9xl";
+	textStyle: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
 

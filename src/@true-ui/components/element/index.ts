@@ -17,7 +17,7 @@ type RecursiveArrayWithUndefined<T> =
   | Array<T | undefined | RecursiveArrayWithUndefined<T>>;
 
 // Base props type for consumers
-export type FormulaicElProps<T extends MotionElementKeys & ArkElementKeys> =
+export type TrueElProps<T extends MotionElementKeys & ArkElementKeys> =
   HTMLMotionProps<T> &
     HTMLArkProps<T> & {
       addStyles?: RecursiveArrayWithUndefined<SystemStyleObject>;
@@ -25,7 +25,7 @@ export type FormulaicElProps<T extends MotionElementKeys & ArkElementKeys> =
 
 // Type for the elements after motion.create is applied
 type ForwardRefMotionComponent<T extends MotionElementKeys & ArkElementKeys> =
-  ForwardRefExoticComponent<FormulaicElProps<T>>;
+  ForwardRefExoticComponent<TrueElProps<T>>;
 
 // Final type for the factory output
 type JsxElements = {
@@ -42,15 +42,15 @@ export const elFactory = () => {
       // @ts-ignore element exists.
       const arkComp = ark[asElement];
       const enhancedComp = forwardRef((props: any, ref) => {
-        const { addStyles: addStylesProp, className, ...rest } = props;
+        const { addStyles, className, ...rest } = props;
         return React.createElement(arkComp, {
           ref,
           className: mergeClasses(
             mergeStyles(
-              ...(Array.isArray(addStylesProp)
+              ...(Array.isArray(addStyles)
                 ? // @ts-expect-error
-                  addStylesProp.flat(Infinity).filter(Boolean)
-                : [addStylesProp].filter(Boolean))
+                  addStyles.flat(Infinity).filter(Boolean)
+                : [addStyles].filter(Boolean))
             ),
             className
           ),
@@ -68,7 +68,7 @@ export const elFactory = () => {
         // @ts-ignore element exists.
         const arkComp = ark[asElement];
         const enhancedComp = forwardRef((props: any, ref) => {
-          const { addStyles: addStylesProp, className, ...rest } = props;
+          const { addStyles, className, ...rest } = props;
           return React.createElement(arkComp, {
             ref,
             className: mergeClasses(
@@ -80,10 +80,10 @@ export const elFactory = () => {
               
               */
               mergeStyles(
-                ...(Array.isArray(addStylesProp)
+                ...(Array.isArray(addStyles)
                   ? // @ts-expect-error
-                    addStylesProp.flat(Infinity)
-                  : [addStylesProp])
+                    addStyles.flat(Infinity)
+                  : [addStyles])
               ),
               className
             ),

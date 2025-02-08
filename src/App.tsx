@@ -1,9 +1,6 @@
 import { Button } from "@true-ui/components/button";
-import {
-  EditableButtonField,
-  FieldExample,
-} from "@true-ui/components/field/examples";
-import { BasicSwitchWithSlotsExample } from "@true-ui/components/switch/examples";
+import { FieldWithSelectExample } from "@true-ui/components/field/_wip/v01";
+
 import { createStyles, mergeStyles } from "@true-ui/styles";
 // import { transformAddStylesProp } from "@true-ui/styles/utils";
 const divStyles = createStyles({
@@ -18,23 +15,13 @@ const divStyles = createStyles({
 }).raw();
 
 function App() {
-  //   const testContent = `
-  //   <Button
-  //     addStyles={{ bg: "pink", _hover: { bg: "blue" }}, css.raw({ bg: "blue"})}
-  //     other="props"
-  //   />
-  // `;
-
-  //   console.log(transformAddStylesProp(testContent));
   return (
     <>
-      <div className={mergeStyles(divStyles, { bg: "base.3" })}>
-        {/* <BasicSwitchExample /> */}
-        <BasicSwitchWithSlotsExample />
-        <EditableButtonField />
-        <FieldExample />
+      <div className={mergeStyles(divStyles, { bg: "base.1" })}>
+        {/* <BasicSwitchWithSlotsExample /> */}
+        <FieldWithSelectExample />
         <Button
-          styleVariant={{ size: "md", affordance: "secondary", color: "base" }}
+          styleVariant={{ size: "md", affordance: "tertiary", color: "base" }}
         >
           Submit for Review
         </Button>

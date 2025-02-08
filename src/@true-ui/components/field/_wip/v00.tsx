@@ -1,4 +1,4 @@
-import { Field } from "@ark-ui/react/field";
+import { Field, useFieldContext } from "@ark-ui/react/field";
 import { Button } from "@true-ui/components/button";
 import { el } from "@true-ui/components/element";
 import { createSlotStyles, createStyles, mergeStyles } from "@true-ui/styles";
@@ -109,7 +109,7 @@ const frameStyles = createStyles({
     border: "1px solid {colors.base.A5}",
     rounded: "4px",
     w: "full",
-    maxW: "400px",
+    maxW: "[400px]",
     bg: "base.1",
     _hover: { border: "1px solid {colors.colorPalette.A7}" },
     _focusWithin: {
@@ -124,7 +124,7 @@ const inputStyles = createStyles({
     colorPalette: "base",
     _focus: {
       ring: "none",
-      ringOffset: "none",
+      // ringOffset: "none",
     },
   },
   variants: {
@@ -151,12 +151,38 @@ const inputStyles = createStyles({
       },
     },
   },
-  defaultVariants: {},
+  defaultVariants: {
+    framed: true,
+  },
 });
 
-export function FieldExample() {
-  // const slotStyles = fieldStyles.raw({ framed: true });
+// Frame Comp
 
+import { type TrueElProps } from "@true-ui/components/element";
+import { dataAttr } from "@zag-js/dom-query";
+import { mergeProps } from "@zag-js/react";
+import { forwardRef } from "react";
+
+type FrameProps = TrueElProps<"div">;
+
+export const FieldFrame = forwardRef<HTMLDivElement, FrameProps>(
+  (props, ref) => {
+    const field = useFieldContext();
+    const stateProps = {
+      "data-disabled": dataAttr(field.disabled),
+      "data-invalid": dataAttr(field.invalid),
+      "data-readonly": dataAttr(field.readOnly),
+      "data-required": dataAttr(field.required),
+    };
+    const mergedProps = mergeProps(stateProps, props);
+
+    return <el.div {...mergedProps} ref={ref} />;
+  }
+);
+
+FieldFrame.displayName = "FieldFrame";
+
+export function FieldExample() {
   return (
     <div
       className={mergeStyles({
@@ -165,9 +191,9 @@ export function FieldExample() {
         gap: "8px",
       })}
     >
-      <Field.Root>
-        <el.div
-          data-part="frame"
+      <Field.Root disabled>
+        <FieldFrame
+          data-part="frame" // add data-scope="field" and move both to comp def
           onClick={(e) => {
             // Prevent focusing if clicking on the input itself
             if (e.target === e.currentTarget) {
@@ -223,7 +249,7 @@ export function FieldExample() {
           >
             +
           </el.span>
-        </el.div>
+        </FieldFrame>
       </Field.Root>
       <Field.Root>
         <Field.Input
@@ -270,6 +296,7 @@ export function EditableButtonField(props: Field.RootProps) {
     <Field.Root {...props}>
       <Editable.Root
         activationMode="dblclick"
+        invalid={!validation?.success} // do you need to set this on the root as well?
         autoResize
         value={value}
         onValueChange={(e) => {
@@ -285,7 +312,13 @@ export function EditableButtonField(props: Field.RootProps) {
             affordance: "tertiary",
             // the default value is undefined so we check for that first,
             // if it's undefined it;s in it's init state and we don't throw an error yet
-            color: validation ? (validation?.success ? "base" : "red") : "base",
+            // color: validation ? (validation?.success ? "base" : "red") : "base",
+            // a button doesn't have an invalid state so it wouldn't make sense to define invalid in the createStyles()
+            // so we need to define it on the root. is this a side effect of trying to use buttons as inputs?
+            // - you could also have the button like styling in an input as a variant? it removes the need to use an editable comp here.
+            // - this also prevents a situation where the Primary as a button is used as a input style!
+            // - this also prevents the need to style for conditions that don't naturally apply to buttons;
+            //    like readOnly, required, invalid, etc.
           }}
         >
           <Editable.Area>
@@ -371,3 +404,105 @@ export function EditableButtonField(props: Field.RootProps) {
 - is a frame needed when using dropdowns/select/switch etc as a input?
 
 */
+const inputStyles2 = createStyles({
+  base: {
+    colorPalette: "base",
+    _selection: {
+      bg: "colorPalette.A4",
+    },
+    _disabled: {
+      opacity: "0.5",
+    },
+    _invalid: {
+      colorPalette: "red",
+    },
+    w: "full",
+    rounded: "4px",
+    _focus: {
+      ring: "none",
+    },
+  },
+  variants: {
+    affordance: {
+      primary: {
+        color: "colorPalette.12",
+        _placeholder: {
+          color: "colorPalette.A6",
+        },
+        /* ...more defined in compound variants section */
+      },
+      secondary: {
+        color: "colorPalette.11",
+        _placeholder: {
+          color: "colorPalette.A6",
+        },
+        /* ...more defined in compound variants section */
+      },
+    },
+    size: {
+      xs: { height: "16px", px: "4px", fontSize: "xs", lineHeight: "none" },
+      sm: { height: "24px", px: "6px", fontSize: "sm" },
+      base: { height: "32px", px: "8px", fontSize: "base" },
+      lg: { height: "40px", px: "12px", fontSize: "lg" },
+      xl: { height: "48px", px: "16px", fontSize: "xl" },
+    },
+    framed: {
+      true: {
+        h: "full",
+        w: "full",
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      affordance: "primary",
+      framed: false,
+      css: {
+        boxSizing: "border-box",
+        backgroundClip: "padding-box",
+        border: "1px solid {colors.colorPalette.A5}",
+        bg: "base.1",
+        _hover: { border: "1px solid {colors.colorPalette.A7}" },
+        _focusVisible: {
+          border: "1px solid {colors.colorPalette.A9}",
+          _hover: { border: "1px solid {colors.colorPalette.A9}" },
+        },
+      },
+    },
+    {
+      affordance: "secondary",
+      framed: false,
+      css: {
+        bg: "colorPalette.A3",
+        _hover: { bg: "colorPalette.A5" },
+        _focusVisible: {
+          bg: "colorPalette.A4",
+        },
+      },
+    },
+  ],
+  defaultVariants: {
+    framed: false,
+    size: "base",
+    affordance: "primary",
+  },
+});
+
+export function RestyledFieldExample() {
+  return (
+    <Field.Root>
+      <Field.Input
+        className={mergeStyles(
+          inputStyles2.raw({
+            framed: false,
+            size: "base",
+            affordance: "secondary",
+          })
+        )}
+        placeholder="Enter your name"
+      />
+      {/* <Field.HelperText>Some additional Info</Field.HelperText> */}
+      <Field.ErrorText>Error Info</Field.ErrorText>
+    </Field.Root>
+  );
+}

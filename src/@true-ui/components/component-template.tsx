@@ -1,5 +1,5 @@
-import { el, type FormulaicElProps } from "@formulaic/components/element";
-import { createStyles, type StyleVariantProps } from "@formulaic/styles";
+import { el, type TrueElProps } from "@true-ui/components/element";
+import { createStyles, type StyleVariantProps } from "@true-ui/styles";
 import { forwardRef } from "react";
 
 /*
@@ -46,7 +46,7 @@ const someStyles = createStyles({
   defaultVariants: {},
 });
 
-export type CompProps = FormulaicElProps<"div"> & {
+export type CompProps = TrueElProps<"div"> & {
   styleVariant?: StyleVariantProps<typeof someStyles>;
 };
 

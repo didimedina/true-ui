@@ -155,20 +155,12 @@ const tokens = {
     "value": "1.25",
     "variable": "var(--line-heights-tight)"
   },
-  "lineHeights.snug": {
-    "value": "1.375",
-    "variable": "var(--line-heights-snug)"
-  },
   "lineHeights.normal": {
     "value": "1.5",
     "variable": "var(--line-heights-normal)"
   },
-  "lineHeights.relaxed": {
-    "value": "1.625",
-    "variable": "var(--line-heights-relaxed)"
-  },
   "lineHeights.loose": {
-    "value": "2",
+    "value": "1.75",
     "variable": "var(--line-heights-loose)"
   },
   "fonts.sans": {
@@ -195,21 +187,13 @@ const tokens = {
     "value": "0em",
     "variable": "var(--letter-spacings-normal)"
   },
-  "letterSpacings.wide": {
+  "letterSpacings.loose": {
     "value": "0.025em",
-    "variable": "var(--letter-spacings-wide)"
+    "variable": "var(--letter-spacings-loose)"
   },
-  "letterSpacings.wider": {
+  "letterSpacings.looser": {
     "value": "0.05em",
-    "variable": "var(--letter-spacings-wider)"
-  },
-  "letterSpacings.widest": {
-    "value": "0.1em",
-    "variable": "var(--letter-spacings-widest)"
-  },
-  "fontSizes.2xs": {
-    "value": "0.5rem",
-    "variable": "var(--font-sizes-2xs)"
+    "variable": "var(--letter-spacings-looser)"
   },
   "fontSizes.xs": {
     "value": "0.75rem",
@@ -219,9 +203,9 @@ const tokens = {
     "value": "0.875rem",
     "variable": "var(--font-sizes-sm)"
   },
-  "fontSizes.md": {
+  "fontSizes.base": {
     "value": "1rem",
-    "variable": "var(--font-sizes-md)"
+    "variable": "var(--font-sizes-base)"
   },
   "fontSizes.lg": {
     "value": "1.125rem",
@@ -230,38 +214,6 @@ const tokens = {
   "fontSizes.xl": {
     "value": "1.25rem",
     "variable": "var(--font-sizes-xl)"
-  },
-  "fontSizes.2xl": {
-    "value": "1.5rem",
-    "variable": "var(--font-sizes-2xl)"
-  },
-  "fontSizes.3xl": {
-    "value": "1.875rem",
-    "variable": "var(--font-sizes-3xl)"
-  },
-  "fontSizes.4xl": {
-    "value": "2.25rem",
-    "variable": "var(--font-sizes-4xl)"
-  },
-  "fontSizes.5xl": {
-    "value": "3rem",
-    "variable": "var(--font-sizes-5xl)"
-  },
-  "fontSizes.6xl": {
-    "value": "3.75rem",
-    "variable": "var(--font-sizes-6xl)"
-  },
-  "fontSizes.7xl": {
-    "value": "4.5rem",
-    "variable": "var(--font-sizes-7xl)"
-  },
-  "fontSizes.8xl": {
-    "value": "6rem",
-    "variable": "var(--font-sizes-8xl)"
-  },
-  "fontSizes.9xl": {
-    "value": "8rem",
-    "variable": "var(--font-sizes-9xl)"
   },
   "shadows.xs": {
     "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
