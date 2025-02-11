@@ -27,9 +27,11 @@ const buttonStyleVariants = createStyles({
       true: {},
     },
     size: {
-      xs: { height: "16px", px: "4px", fontSize: "12px" },
-      sm: { height: "24px", px: "8px", fontSize: "14px" },
-      md: { height: "32px", px: "12px", fontSize: "16px" },
+      xs: { height: "16px", px: "6px", fontSize: "sm" },
+      sm: { height: "24px", px: "8px", fontSize: "md" },
+      base: { height: "32px", px: "12px", fontSize: "base" },
+      lg: { height: "40px", px: "16px", fontSize: "lg" },
+      xl: { height: "48px", px: "20px", fontSize: "xl" },
     },
     color: {
       base: { colorPalette: "base" },
@@ -81,7 +83,7 @@ const buttonStyleVariants = createStyles({
     },
   ],
   defaultVariants: {
-    size: "md",
+    size: "base",
     color: "base",
     affordance: "primary",
   },

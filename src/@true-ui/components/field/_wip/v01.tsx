@@ -326,94 +326,94 @@ export const FieldWithSelectExample2 = (props: Field.RootProps) => {
   );
 };
 
-// function filterListCollection<T>(
-//   collection: ListCollection<T>,
-//   searchQuery: string
-// ): T[] {
-//   if (!searchQuery) return collection.items;
-//   return collection.items.filter((item) => {
-//     const itemString = collection.stringifyItem(item);
-//     return itemString?.toLowerCase().includes(searchQuery.toLowerCase());
-//   });
-// }
+function filterListCollection<T>(
+  collection: ListCollection<T>,
+  searchQuery: string
+): T[] {
+  if (!searchQuery) return collection.items;
+  return collection.items.filter((item) => {
+    const itemString = collection.stringifyItem(item);
+    return itemString?.toLowerCase().includes(searchQuery.toLowerCase());
+  });
+}
 
-// export const SearchableSelect = () => {
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [isOpen, setIsOpen] = useState(false);
-//   const inputRef = useRef<HTMLInputElement>(null);
-//   const collection = createListCollection({
-//     items: ["React", "Solid", "Vue", "Svelte", "Angular", "Preact"],
-//   });
+export const SearchableSelect = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const collection = createListCollection({
+    items: ["React", "Solid", "Vue", "Svelte", "Angular", "Preact"],
+  });
 
-//   const filteredItems = filterListCollection(collection, searchQuery);
+  const filteredItems = filterListCollection(collection, searchQuery);
 
-//   return (
-//     <Select.Root
-//       collection={collection}
-//       // onOpenChange={({ open }) => setIsOpen(open)}
-//       onOpenChange={({ open }) => {
-//         setIsOpen(open);
-//         if (open) {
-//           requestAnimationFrame(() => {
-//             inputRef.current?.focus();
-//           });
-//         }
-//       }}
-//       onValueChange={() => setSearchQuery("")}
-//     >
-//       <Select.Label>Framework</Select.Label>
-//       <Select.Control>
-//         <Select.Trigger>
-//           {isOpen ? (
-//             <input
-//               ref={inputRef}
-//               placeholder="Search frameworks..."
-//               value={searchQuery}
-//               onChange={(e) => setSearchQuery(e.target.value)}
-//               onClick={(e) => e.stopPropagation()}
-//               // onKeyDown={(e) => e.stopPropagation()}
-//               onKeyDown={(e) => {
-//                 // Only stop propagation for non-navigation keys
-//                 if (e.key !== "ArrowDown" && e.key !== "ArrowUp") {
-//                   e.stopPropagation();
-//                 }
-//               }}
-//               style={{
-//                 border: "none",
-//                 outline: "none",
-//                 width: "100%",
-//                 background: "transparent",
-//               }}
-//             />
-//           ) : (
-//             <Select.ValueText placeholder="Select a Framework" />
-//           )}
-//           <Select.Indicator>↓</Select.Indicator>
-//         </Select.Trigger>
-//         <Select.ClearTrigger>Clear</Select.ClearTrigger>
-//       </Select.Control>
-//       <Portal>
-//         <Select.Positioner>
-//           <Select.Content>
-//             <Select.ItemGroup>
-//               <Select.ItemGroupLabel>Frameworks</Select.ItemGroupLabel>
-//               {filteredItems.length === 0 ? (
-//                 <div style={{ padding: "8px", color: "#666" }}>
-//                   No results found
-//                 </div>
-//               ) : (
-//                 filteredItems.map((item) => (
-//                   <Select.Item key={item} item={item}>
-//                     <Select.ItemText>{item}</Select.ItemText>
-//                     <Select.ItemIndicator>✓</Select.ItemIndicator>
-//                   </Select.Item>
-//                 ))
-//               )}
-//             </Select.ItemGroup>
-//           </Select.Content>
-//         </Select.Positioner>
-//       </Portal>
-//       <Select.HiddenSelect />
-//     </Select.Root>
-//   );
-// };
+  return (
+    <Select.Root
+      collection={collection}
+      // onOpenChange={({ open }) => setIsOpen(open)}
+      onOpenChange={({ open }) => {
+        setIsOpen(open);
+        if (open) {
+          requestAnimationFrame(() => {
+            inputRef.current?.focus();
+          });
+        }
+      }}
+      onValueChange={() => setSearchQuery("")}
+    >
+      <Select.Label>Framework</Select.Label>
+      <Select.Control>
+        <Select.Trigger>
+          {isOpen ? (
+            <input
+              ref={inputRef}
+              placeholder="Search frameworks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
+              // onKeyDown={(e) => e.stopPropagation()}
+              onKeyDown={(e) => {
+                // Only stop propagation for non-navigation keys
+                if (e.key !== "ArrowDown" && e.key !== "ArrowUp") {
+                  e.stopPropagation();
+                }
+              }}
+              style={{
+                border: "none",
+                outline: "none",
+                width: "100%",
+                background: "transparent",
+              }}
+            />
+          ) : (
+            <Select.ValueText placeholder="Select a Framework" />
+          )}
+          <Select.Indicator>↓</Select.Indicator>
+        </Select.Trigger>
+        <Select.ClearTrigger>Clear</Select.ClearTrigger>
+      </Select.Control>
+      <Portal>
+        <Select.Positioner>
+          <Select.Content>
+            <Select.ItemGroup>
+              <Select.ItemGroupLabel>Frameworks</Select.ItemGroupLabel>
+              {filteredItems.length === 0 ? (
+                <div style={{ padding: "8px", color: "#666" }}>
+                  No results found
+                </div>
+              ) : (
+                filteredItems.map((item) => (
+                  <Select.Item key={item} item={item}>
+                    <Select.ItemText>{item}</Select.ItemText>
+                    <Select.ItemIndicator>✓</Select.ItemIndicator>
+                  </Select.Item>
+                ))
+              )}
+            </Select.ItemGroup>
+          </Select.Content>
+        </Select.Positioner>
+      </Portal>
+      <Select.HiddenSelect />
+    </Select.Root>
+  );
+};

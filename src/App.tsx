@@ -1,8 +1,11 @@
 import { Button } from "@true-ui/components/button";
+import { EditableButtonField } from "@true-ui/components/field/_wip/v00";
 import {
+  BasicDatePickerExample,
   FieldWithSelectExample,
-  FieldWithSelectExample2,
-} from "@true-ui/components/field/_wip/v01";
+  NumberInputWithFieldExample,
+  SelectWithFieldExample,
+} from "@true-ui/components/field/_wip/v02";
 
 import { createStyles, mergeStyles } from "@true-ui/styles";
 // import { transformAddStylesProp } from "@true-ui/styles/utils";
@@ -22,10 +25,16 @@ function App() {
     <>
       <div className={mergeStyles(divStyles, { bg: "base.1" })}>
         {/* <BasicSwitchWithSlotsExample /> */}
-        {/* <FieldWithSelectExample /> */}
-        <FieldWithSelectExample2 />
-        <Button
-          styleVariant={{ size: "md", affordance: "tertiary", color: "base" }}
+        {/* <BasicDatePickerExample /> */}
+        <SelectWithFieldExample />
+        <EditableButtonField />
+        <NumberInputWithFieldExample />
+        <Button 
+          styleVariant={{
+            size: "base",
+            affordance: "tertiary",
+            color:  "red",
+          }}
         >
           Submit for Review
         </Button>
