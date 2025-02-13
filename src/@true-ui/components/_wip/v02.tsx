@@ -1,4 +1,4 @@
-import { ark, HTMLProps } from "@ark-ui/react";
+import { ark, HTMLArkProps, HTMLProps } from "@ark-ui/react";
 import { Field, useFieldContext } from "@ark-ui/react/field";
 import { Portal } from "@ark-ui/react/portal";
 import {
@@ -6,6 +6,7 @@ import {
   Select,
   type ListCollection,
 } from "@ark-ui/react/select";
+import { defineRecipe } from "@panda";
 import { el, type TrueElProps } from "@true-ui/components/element";
 import {
   createStyles,
@@ -14,8 +15,7 @@ import {
 } from "@true-ui/styles";
 import { ariaAttr, dataAttr } from "@zag-js/dom-query";
 import { mergeProps } from "@zag-js/react";
-import { forwardRef, useMemo, useRef, useState } from "react";
-import { defineRecipe } from "@panda";
+import { forwardRef, useMemo } from "react";
 // const inputStyles = createStyles({
 //   base: {
 //     colorPalette: "base",
@@ -101,6 +101,8 @@ import { defineRecipe } from "@panda";
 // });
 const fieldFrameStyles = createStyles({
   base: {
+    appearance: "none",
+    background: "none",
     display: "flex",
     alignItems: "center",
     colorPalette: "base",
@@ -114,9 +116,6 @@ const fieldFrameStyles = createStyles({
     },
     _invalid: {
       colorPalette: "red",
-    },
-    _focus: {
-      ring: "none",
     },
   },
   variants: {
@@ -132,7 +131,7 @@ const fieldFrameStyles = createStyles({
           color: "colorPalette.A6",
         },
         _hover: { border: "1px solid {colors.colorPalette.A7}" },
-        _focusVisible: {
+        _focusWithin: {
           border: "1px solid {colors.colorPalette.A9}",
           _hover: { border: "1px solid {colors.colorPalette.A9}" },
         },
@@ -163,97 +162,9 @@ const fieldFrameStyles = createStyles({
     weight: "subtle",
     size: "base",
   },
-  // variants: {
-  //   affordance: {
-  //     primary: {
-  //       color: "colorPalette.12",
-  //       _placeholder: {
-  //         color: "colorPalette.A6",
-  //       },
-  //       /* ...more defined in compound variants section */
-  //     },
-  //     secondary: {
-  //       color: "colorPalette.11",
-  //       _placeholder: {
-  //         color: "colorPalette.A6",
-  //       },
-  //       /* ...more defined in compound variants section */
-  //     },
-  //   },
-  //   size: {
-  //     xs: { height: "16px", px: "4px", fontSize: "xs" },
-  //     sm: { height: "24px", px: "6px", fontSize: "sm" },
-  //     base: { height: "32px", px: "8px", fontSize: "base" },
-  //     lg: { height: "40px", px: "12px", fontSize: "lg" },
-  //     xl: { height: "48px", px: "16px", fontSize: "xl" },
-  //   },
-  //   framed: {
-  //     true: {
-  //       h: "full",
-  //       w: "full",
-  //     },
-  //   },
-  // },
-  // compoundVariants: [
-  //   {
-  //     affordance: "primary",
-  //     framed: false,
-  //     css: {
-  //       boxSizing: "border-box",
-  //       backgroundClip: "padding-box",
-  //       border: "1px solid {colors.colorPalette.A5}",
-  //       bg: "base.1",
-  //       _hover: { border: "1px solid {colors.colorPalette.A7}" },
-  //       _focusVisible: {
-  //         border: "1px solid {colors.colorPalette.A9}",
-  //         _hover: { border: "1px solid {colors.colorPalette.A9}" },
-  //       },
-  //     },
-  //   },
-  //   {
-  //     affordance: "secondary",
-  //     framed: false,
-  //     css: {
-  //       bg: "colorPalette.A3",
-  //       _hover: { bg: "colorPalette.A4" },
-  //       _focusVisible: {
-  //         bg: "colorPalette.A4",
-  //       },
-  //     },
-  //   },
-  // ],
-  // defaultVariants: {
-  //   framed: false,
-  //   size: "base",
-  //   affordance: "primary",
-  // },
 });
 
-// const fieldFrameStyles = createStyles({
-//   base: {
-//     colorPalette: "base",
-//     boxSizing: "border-box",
-//     backgroundClip: "padding-box",
-//     h: "32px",
-//     color: "base.9",
-//     px: "8px",
-//     display: "flex",
-//     alignItems: "center",
-//     gap: "6px", // need to bring this back and remove px on input
-//     border: "1px solid {colors.base.A5}",
-//     rounded: "4px",
-//     w: "full",
-//     maxW: "[400px]",
-//     bg: "base.1",
-//     _hover: { border: "1px solid {colors.colorPalette.A7}" },
-//     _focusWithin: {
-//       border: "1px solid {colors.colorPalette.A9}",
-//       _hover: { border: "1px solid {colors.colorPalette.A9}" },
-//     },
-//   },
-// });
-
-type FrameProps = TrueElProps<"div"> & {
+type FrameProps = HTMLArkProps<"div"> & {
   styleVariant?: StyleVariantProps<typeof fieldFrameStyles>;
 };
 
@@ -296,7 +207,7 @@ export const FieldFrameWIP = forwardRef<HTMLDivElement, FrameProps>(
           }
         }}
         className={mergeStyles(
-          fieldFrameStyles.raw({ size: "base", affordance: "secondary" })
+          fieldFrameStyles.raw({ size: "base", weight: "outline" })
         )}
       />
     );
@@ -349,9 +260,7 @@ export const NumberInputWithFieldExample = (props: Field.RootProps) => (
     >
       {/* <NumberInput.Label>Label</NumberInput.Label> */}
       <FieldFrameWIP>
-        <NumberInput.Input
-          className={mergeStyles({ _focus: { ring: "none" } })}
-        />
+        <NumberInput.Input className={mergeStyles({ outline: "none" })} />
         <NumberInput.Control>
           <NumberInput.DecrementTrigger>-1</NumberInput.DecrementTrigger>
           <NumberInput.IncrementTrigger>+1</NumberInput.IncrementTrigger>

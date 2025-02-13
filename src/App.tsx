@@ -1,11 +1,12 @@
+import { Alert } from "@true-ui/components/alert";
 import { Button } from "@true-ui/components/button";
-import { EditableButtonField } from "@true-ui/components/field/_wip/v00";
+import { EditableButtonField } from "@true-ui/components/_wip/v00";
 import {
   BasicDatePickerExample,
   FieldWithSelectExample,
   NumberInputWithFieldExample,
   SelectWithFieldExample,
-} from "@true-ui/components/field/_wip/v02";
+} from "@true-ui/components/_wip/v02";
 
 import { createStyles, mergeStyles } from "@true-ui/styles";
 // import { transformAddStylesProp } from "@true-ui/styles/utils";
@@ -28,12 +29,21 @@ function App() {
         {/* <BasicDatePickerExample /> */}
         <SelectWithFieldExample />
         <EditableButtonField />
+        <Alert.Root>
+          <Alert.Icon></Alert.Icon>
+          <Alert.Content>
+            <Alert.Title>Browser Update available</Alert.Title>
+            <Alert.Description>
+              For the best experience, please update your browser.
+            </Alert.Description>
+          </Alert.Content>
+        </Alert.Root>
         <NumberInputWithFieldExample />
-        <Button 
+        <Button
           styleVariant={{
             size: "base",
             affordance: "tertiary",
-            color:  "red",
+            color: "red",
           }}
         >
           Submit for Review
