@@ -1,13 +1,6 @@
-// import { ark, type HTMLArkProps } from "@ark-ui/react";
 import { el, type HTMLTrueElProps } from "@true-ui/components/factory";
-// import { el, type TrueElProps } from "@true-ui/components/element";
-import {
-  createStyles,
-  type StyleVariantProps,
-} from "@true-ui/styles";
+import { createStyles, type StyleVariantProps } from "@true-ui/styles";
 import { forwardRef } from "react";
-
-
 
 const buttonStyles = createStyles({
   base: {
@@ -118,10 +111,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <el.button
         ref={ref}
         addStyles={[buttonStyles.raw(styleVariant || {}), addStyles]}
-        // className={mergeClasses(
-        //   buttonStyleVariants(styleVariant || {}),
-        //   className
-        // )}
         {...restProps}
       />
     );

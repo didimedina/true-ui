@@ -51,43 +51,43 @@ Usage
 ================================ */
 
 // 1. Define your schema with const assertion to preserve literal types
-const variants = {
-  variants: {
-    size: ["sm", "md", "lg"],
-  },
-  defaultVariants: {
-    size: "md",
-  },
-} as const satisfies StrictVariants;
+// const variants = {
+//   variants: {
+//     size: ["sm", "md", "lg"],
+//   },
+//   defaultVariants: {
+//     size: "md",
+//   },
+// } as const satisfies StrictVariants;
 
-// 2. Extract the style schema from the variant definition
-type MyCompStylesSchema = StylesSchema<typeof variants>;
+// // 2. Extract the style schema from the variant definition
+// type MyCompStylesSchema = StylesSchema<typeof variants>;
 
 
-// 3. Create your styles with the style schema using satisfies
-//    and use the variantSchema for default variants.
-const someStyles = createStyles({
-  base: {
-    px: "4",
-  },
-  variants: {
-    size: {
-      sm: {},
-      md: {},
-      lg: {},
-    },
-  },
-  defaultVariants: {
-    ...variants.defaultVariants,
-  },
-  compoundVariants: [
-    {
-      size: "md",
-      css: { fontWeight: "bold" },
-    },
-  ],
-  deprecated: false,
-} satisfies MyCompStylesSchema);
+// // 3. Create your styles with the style schema using satisfies
+// //    and use the variantSchema for default variants.
+// const someStyles = createStyles({
+//   base: {
+//     px: "4",
+//   },
+//   variants: {
+//     size: {
+//       sm: {},
+//       md: {},
+//       lg: {},
+//     },
+//   },
+//   defaultVariants: {
+//     ...variants.defaultVariants,
+//   },
+//   compoundVariants: [
+//     {
+//       size: "md",
+//       css: { fontWeight: "bold" },
+//     },
+//   ],
+//   deprecated: false,
+// } satisfies MyCompStylesSchema);
 
 
 
