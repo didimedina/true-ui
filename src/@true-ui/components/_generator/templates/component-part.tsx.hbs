@@ -1,0 +1,28 @@
+// ================================================
+//  {{componentName}}
+// ================================================
+
+export type {{componentName}}Props =
+  HTMLTrueElProps<"div"> & {
+    styleVariant?: StyleVariantProps<typeof {{lowercase componentName}}Styles>;
+  };
+
+const {{lowercase componentName}}Styles = createStyles({
+  base: {
+      /* styles... */
+  },
+});
+
+export const {{componentName}} = forwardRef<HTMLDivElement, {{componentName}}Props>((props, ref) => {
+  const { styleVariant, addStyles, ...rest } = props;
+
+  return (
+      <el.div
+        ref={ref}
+        addStyles={[{{lowercase componentName}}Styles.raw(styleVariant || {}), addStyles]}
+        {...rest}
+      />
+  );
+});
+
+{{componentName}}.displayName = "Comp{{componentName}}";

@@ -105,13 +105,13 @@ export type ButtonProps = HTMLTrueElProps<"button"> & {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
-    const { styleVariant, addStyles, ...restProps } = props;
+    const { styleVariant, addStyles, ...rest } = props;
 
     return (
       <el.button
         ref={ref}
         addStyles={[buttonStyles.raw(styleVariant || {}), addStyles]}
-        {...restProps}
+        {...rest}
       />
     );
   }

@@ -1,102 +1,129 @@
-import { ark, type HTMLArkProps, type HTMLProps } from "@ark-ui/react";
-import { Field, fieldAnatomy, useFieldContext } from "@ark-ui/react/field";
+import { Field as ArkField, useFieldContext } from "@ark-ui/react/field";
 import {
-  createSlotStyles,
-  mergeClasses,
-  type StyleVariantProps,
-} from "@true-ui/styles";
+  el,
+  type HTMLProps,
+  type HTMLTrueElProps,
+} from "@true-ui/components/factory";
+import { createStyles, type StyleVariantProps } from "@true-ui/styles";
 import { ariaAttr, dataAttr } from "@zag-js/dom-query";
 import { mergeProps } from "@zag-js/react";
-import { createContext, forwardRef, useContext, useMemo } from "react";
+import { forwardRef, useMemo } from "react";
 
-// Styles
-export const fieldStyles = createSlotStyles({
-  className: "field",
-  slots: [...fieldAnatomy.keys(), "frame"],
+// Root
+export type RootProps = ArkField.RootProps &
+  HTMLTrueElProps<"div"> & {
+    styleVariant?: StyleVariantProps<typeof rootStyles>;
+  };
+
+const rootStyles = createStyles({
   base: {
-    root: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "1.5",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1.5",
+    // label: {
+    //   color: "colorPalette.12",
+    //   //   fontWeight: "",
+    //   textStyle: "sm",
+    //   _disabled: {
+    //     color: "fg.disabled",
+    //   },
+    // },
+    // helperText: {
+    //   color: "fg.muted",
+    //   textStyle: "sm",
+    //   _disabled: {
+    //     color: "fg.disabled",
+    //   },
+    // },
+    // errorText: {
+    //   alignItems: "center",
+    //   color: "fg.error",
+    //   display: "inline-flex",
+    //   gap: "2",
+    //   textStyle: "sm",
+    //   _disabled: {
+    //     color: "fg.disabled",
+    //   },
+    // },
+  },
+});
+
+export const Root = forwardRef<HTMLDivElement, RootProps>((props, ref) => {
+  const { styleVariant, addStyles, ...rest } = props;
+
+  return (
+    <ArkField.Root asChild>
+      <el.div
+        ref={ref}
+        addStyles={[rootStyles.raw(styleVariant || {}), addStyles]}
+        {...rest}
+      />
+    </ArkField.Root>
+  );
+});
+
+Root.displayName = "FieldRoot";
+
+// Frame
+export type FrameProps = HTMLTrueElProps<"div">;
+
+const frameStyles = createStyles({
+  base: {
+    appearance: "none",
+    background: "none",
+    display: "flex",
+    alignItems: "center",
+    colorPalette: "base",
+    w: "full",
+    rounded: "4px",
+    _selection: {
+      bg: "colorPalette.A4",
     },
-    label: {
-      color: "colorPalette.12",
-    //   fontWeight: "",
-      textStyle: "sm",
-      _disabled: {
-        color: "fg.disabled",
-      },
+    _disabled: {
+      opacity: "0.5",
     },
-    helperText: {
-      color: "fg.muted",
-      textStyle: "sm",
-      _disabled: {
-        color: "fg.disabled",
-      },
-    },
-    errorText: {
-      alignItems: "center",
-      color: "fg.error",
-      display: "inline-flex",
-      gap: "2",
-      textStyle: "sm",
-      _disabled: {
-        color: "fg.disabled",
-      },
+    _invalid: {
+      colorPalette: "red",
     },
   },
   variants: {
     weight: {
       outline: {
-        frame: {
-          bg: "colorPalette.A1",
-          color: "colorPalette.12",
-          boxSizing: "border-box",
-          backgroundClip: "padding-box",
-          border: "1px solid {colors.colorPalette.A5}",
+        bg: "colorPalette.A1",
+        color: "colorPalette.12",
+        boxSizing: "border-box",
+        backgroundClip: "padding-box",
+        border: "1px solid {colors.colorPalette.A5}",
 
-          _placeholder: {
-            color: "colorPalette.A6",
-          },
-          _hover: { border: "1px solid {colors.colorPalette.A7}" },
-          _focusWithin: {
-            border: "1px solid {colors.colorPalette.A9}",
-            _hover: { border: "1px solid {colors.colorPalette.A9}" },
-          },
+        _placeholder: {
+          color: "colorPalette.A6",
+        },
+        _hover: { border: "1px solid {colors.colorPalette.A7}" },
+        _focusWithin: {
+          border: "1px solid {colors.colorPalette.A9}",
+          _hover: { border: "1px solid {colors.colorPalette.A9}" },
         },
       },
       subtle: {
-        frame: {
-          bg: "colorPalette.A3",
-          color: "colorPalette.11",
+        bg: "colorPalette.A3",
+        color: "colorPalette.11",
 
-          _placeholder: {
-            color: "colorPalette.A6",
-          },
+        _placeholder: {
+          color: "colorPalette.A6",
+        },
+        _hover: { bg: "colorPalette.A4" },
+        _focusVisible: {
+          bg: "colorPalette.A4",
           _hover: { bg: "colorPalette.A4" },
-          _focusVisible: {
-            bg: "colorPalette.A4",
-            _hover: { bg: "colorPalette.A4" },
-          },
         },
       },
     },
     size: {
-      xs: {
-        frame: { gap: "4px", height: "16px", px: "4px", textStyle: "xs" },
-      },
-      sm: {
-        frame: { gap: "6px", height: "24px", px: "6px", textStyle: "sm" },
-      },
-      base: {
-        frame: { gap: "8px", height: "32px", px: "8px", textStyle: "base" },
-      },
-      lg: {
-        frame: { gap: "12px", height: "40px", px: "12px", textStyle: "lg" },
-      },
-      xl: {
-        frame: { gap: "16px", height: "48px", px: "16px", textStyle: "xl" },
-      },
+      xs: { gap: "4px", height: "16px", px: "4px", fontSize: "xs" },
+      sm: { gap: "6px", height: "24px", px: "6px", fontSize: "sm" },
+      base: { gap: "8px", height: "32px", px: "8px", fontSize: "base" },
+      lg: { gap: "12px", height: "40px", px: "12px", fontSize: "lg" },
+      xl: { gap: "16px", height: "48px", px: "16px", fontSize: "xl" },
     },
   },
   defaultVariants: {
@@ -105,48 +132,8 @@ export const fieldStyles = createSlotStyles({
   },
 });
 
-// Style Context
-const FieldStyleContext = createContext<ReturnType<typeof fieldStyles> | null>(
-  null
-);
-
-const useFieldStyleContext = () => {
-  const context = useContext(FieldStyleContext);
-  if (!context) {
-    throw new Error(
-      "Field components must be wrapped in <Field.Root> to inherit styles"
-    );
-  }
-  return context;
-};
-
-// Root
-export type RootProps = Field.RootProps & {
-  styleVariant?: StyleVariantProps<typeof fieldStyles>;
-};
-
-export const Root = forwardRef<HTMLDivElement, RootProps>((props, ref) => {
-  const { styleVariant, className, ...rest } = props;
-
-  const slotStyles = fieldStyles({ styleVariant });
-
-  return (
-    <FieldStyleContext.Provider value={slotStyles}>
-      <ark.div
-        ref={ref}
-        className={mergeClasses(slotStyles.root, className)}
-        {...rest}
-      />
-    </FieldStyleContext.Provider>
-  );
-});
-
-Root.displayName = "FieldRoot";
-
-// Frame
-export type FrameProps = HTMLArkProps<"div">;
-
 export const Frame = forwardRef<HTMLDivElement, FrameProps>((props, ref) => {
+  const { addStyles, ...rest } = props;
   const field = useFieldContext();
   // ark doesn't export getControlProps() so we're essentially asking for the same contexts to recreate it
   const frameProps = useMemo(
@@ -169,11 +156,12 @@ export const Frame = forwardRef<HTMLDivElement, FrameProps>((props, ref) => {
       field?.disabled,
     ]
   );
-  const mergedProps = mergeProps(frameProps, props);
+  const mergedProps = mergeProps(frameProps, rest);
 
   return (
-    <ark.div
+    <el.div
       {...mergedProps}
+      addStyles={[frameStyles.raw(), addStyles]}
       ref={ref}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
@@ -182,30 +170,38 @@ export const Frame = forwardRef<HTMLDivElement, FrameProps>((props, ref) => {
           if (control instanceof HTMLElement) control.focus();
         }
       }}
-      className={slotStyles.frame}
     />
   );
 });
 
 Frame.displayName = "FieldFrame";
 
-// Content
-export type ContentProps = HTMLArkProps<"div">;
 
-export const Content = forwardRef<HTMLDivElement, ContentProps>(
-  (props, ref) => {
-    const { className, ...rest } = props;
+// ================================================
+//  Input
+// ================================================
 
-    const slotStyles = useFieldStyleContext();
+export type InputProps =
+  HTMLTrueElProps<"div"> & {
+    styleVariant?: StyleVariantProps<typeof inputStyles>;
+  };
 
-    return (
-      <ark.div
+const inputStyles = createStyles({
+  base: {
+      /* styles... */
+  },
+});
+
+export const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
+  const { styleVariant, addStyles, ...rest } = props;
+
+  return (
+      <el.div
         ref={ref}
-        className={mergeClasses(slotStyles.content, className)}
+        addStyles={[inputStyles.raw(styleVariant || {}), addStyles]}
         {...rest}
       />
-    );
-  }
-);
+  );
+});
 
-Content.displayName = "FieldContent";
+Input.displayName = "CompInput";
