@@ -1,12 +1,5 @@
 import { Alert } from "@true-ui/components/alert";
 import { Button } from "@true-ui/components/button";
-import { EditableButtonField } from "@true-ui/components/_wip/v00";
-import {
-  BasicDatePickerExample,
-  FieldWithSelectExample,
-  NumberInputWithFieldExample,
-  SelectWithFieldExample,
-} from "@true-ui/components/_wip/v02";
 
 import { createStyles, mergeStyles } from "@true-ui/styles";
 // import { transformAddStylesProp } from "@true-ui/styles/utils";
@@ -25,10 +18,6 @@ function App() {
   return (
     <>
       <div className={mergeStyles(divStyles, { bg: "base.1" })}>
-        {/* <BasicSwitchWithSlotsExample /> */}
-        {/* <BasicDatePickerExample /> */}
-        <SelectWithFieldExample />
-        <EditableButtonField />
         <Alert.Root>
           <Alert.Icon></Alert.Icon>
           <Alert.Content>
@@ -38,11 +27,10 @@ function App() {
             </Alert.Description>
           </Alert.Content>
         </Alert.Root>
-        <NumberInputWithFieldExample />
         <Button
           styleVariant={{
             size: "base",
-            affordance: "tertiary",
+            weight: "inline",
             color: "red",
           }}
         >

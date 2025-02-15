@@ -1,2 +1,3 @@
 export * from "./transformAddStylesProp";
-export * from "./createStylesSchema";
+export * from "./stylesSchema";
+export * from "./styleVariantContext";

@@ -13,7 +13,7 @@ const rootStyles = createStyles({
     display: "flex",
     gap: "3",
     p: "4",
-    width: "full",
+    width: "fit",
   },
 });
 
@@ -90,7 +90,9 @@ Description.displayName = "AlertDescription";
 const iconStyles = createStyles({
   base: {
     color: "colorPalette.12",
-    textStyle: "sm",
+    flexShrink: "0",
+    width: "32px",
+    height: "32px",
   },
 });
 

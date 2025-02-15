@@ -309,7 +309,7 @@ export function EditableButtonField(props: Field.RootProps) {
         <Button
           styleVariant={{
             size: "sm",
-            affordance: "tertiary",
+            weight: "subtle",
             // the default value is undefined so we check for that first,
             // if it's undefined it;s in it's init state and we don't throw an error yet
             // color: validation ? (validation?.success ? "base" : "red") : "base",

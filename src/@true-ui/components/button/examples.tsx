@@ -1,12 +1,12 @@
 import { Button } from "@true-ui/components/button";
 
 // Regular Button
-export const ButtonExample = () => (
+export const GraySolidButtonExample = () => (
   <Button
     styleVariant={{
-      size: "md",
+      size: "base",
       color: "base",
-      affordance: "primary",
+      weight: "solid",
     }}
-  ></Button>
+  >Click Me!</Button>
 );

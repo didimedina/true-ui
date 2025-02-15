@@ -1,4 +1,5 @@
 // import { cva } from "@true-ui/styles/panda-codegen/css";
+import { createStyles } from "@true-ui/styles/";
 import type {
   Pretty,
   RecipeCompoundVariant,
@@ -7,17 +8,17 @@ import type {
   SystemStyleObject,
 } from "@true-ui/styles/panda-codegen/types";
 
-export type VariantDefinitionRecord = Record<any, string[]>;
+type VariantDefinitionRecord = Record<any, string[]>;
 
-export interface VariantDefinition<
+export type StrictVariants<
   T extends RecipeVariantRecord = RecipeVariantRecord,
-> {
+> = {
   // Both Variants and DefaultVariants are required when using VariantDefinition
   variants: VariantDefinitionRecord;
   defaultVariants: RecipeSelection<T>;
-}
+};
 
-export type ExtractStyleSchema<T extends VariantDefinition> = {
+export type StylesSchema<T extends StrictVariants> = {
   // base is optional and can be defined uniquily in evey createStyles() function
   base?: SystemStyleObject;
 
@@ -45,38 +46,48 @@ export type ExtractStyleSchema<T extends VariantDefinition> = {
   defaultVariants: T["defaultVariants"];
 };
 
-// Define your schema with const assertion to preserve literal types
-// const variantSchema = {
-//   variants: {
-//     size: ["sm", "md", "lg", "xl"],
-//   },
-//   defaultVariants: {
-//     size: "md",
-//   },
-// } as const satisfies VariantDefinition;
+/* ================================
+Usage
+================================ */
 
-// type StyleSchema = ExtractStyleSchema<typeof variantSchema>;
+// 1. Define your schema with const assertion to preserve literal types
+const variants = {
+  variants: {
+    size: ["sm", "md", "lg"],
+  },
+  defaultVariants: {
+    size: "md",
+  },
+} as const satisfies StrictVariants;
 
-// const styles = cva({
-//   base: {
-//     px: "4",
-//   },
-//   variants: {
-//     size: {
-//       sm: { bg: "red", px: "2" },
-//       md: { bg: "blue", px: "4" },
-//       lg: { bg: "green", px: "6" },
-//       xl: {},
-//     },
-//   },
-//   defaultVariants: {
-//     ...variantSchema.defaultVariants,
-//   },
-//   compoundVariants: [
-//     {
-//       size: "md",
-//       css: { fontWeight: "bold" },
-//     },
-//   ],
-//   deprecated: false,
-// } satisfies StyleSchema);
+// 2. Extract the style schema from the variant definition
+type MyCompStylesSchema = StylesSchema<typeof variants>;
+
+
+// 3. Create your styles with the style schema using satisfies
+//    and use the variantSchema for default variants.
+const someStyles = createStyles({
+  base: {
+    px: "4",
+  },
+  variants: {
+    size: {
+      sm: {},
+      md: {},
+      lg: {},
+    },
+  },
+  defaultVariants: {
+    ...variants.defaultVariants,
+  },
+  compoundVariants: [
+    {
+      size: "md",
+      css: { fontWeight: "bold" },
+    },
+  ],
+  deprecated: false,
+} satisfies MyCompStylesSchema);
+
+
+
