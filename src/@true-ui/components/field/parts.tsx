@@ -9,7 +9,9 @@ import { ariaAttr, dataAttr } from "@zag-js/dom-query";
 import { mergeProps } from "@zag-js/react";
 import { forwardRef, useMemo } from "react";
 
-// Root
+// ================================================
+//  Root
+// ================================================
 export type RootProps = ArkField.RootProps &
   HTMLTrueElProps<"div"> & {
     styleVariant?: StyleVariantProps<typeof rootStyles>;
@@ -64,7 +66,10 @@ export const Root = forwardRef<HTMLDivElement, RootProps>((props, ref) => {
 
 Root.displayName = "FieldRoot";
 
-// Frame
+// ================================================
+//  Frame
+// ================================================
+
 export type FrameProps = HTMLTrueElProps<"div">;
 
 const frameStyles = createStyles({
@@ -204,4 +209,4 @@ export const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   );
 });
 
-Input.displayName = "CompInput";
+Input.displayName = "FieldInput";

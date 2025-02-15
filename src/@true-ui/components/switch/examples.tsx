@@ -1,5 +1,5 @@
 import { Switch } from "@ark-ui/react/switch";
-import { createSlotStyles, createStyles } from "@true-ui/styles";
+import { createStyles } from "@true-ui/styles";
 import { useState } from "react";
 
 // Without createSlotStyles()

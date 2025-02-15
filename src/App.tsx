@@ -2,6 +2,7 @@ import { Alert } from "@true-ui/components/alert";
 import { Button } from "@true-ui/components/button";
 import { Field } from "@true-ui/components/field";
 import { createStyles, mergeStyles } from "@true-ui/styles";
+
 const divStyles = createStyles({
   base: {
     display: "flex",
@@ -18,7 +19,7 @@ function App() {
     <>
       <div className={mergeStyles(divStyles, { bg: "base.1" })}>
         <Alert.Root>
-          <Alert.Icon></Alert.Icon>
+          {/* <Alert.Icon/> */}
           <Alert.Content>
             <Alert.Title>Browser Update available</Alert.Title>
             <Alert.Description>
@@ -29,8 +30,8 @@ function App() {
         <Button
           styleVariant={{
             size: "base",
-            weight: "inline",
-            color: "red",
+            weight: "outline",
+            color: "jade",
           }}
         >
           Submit for Review

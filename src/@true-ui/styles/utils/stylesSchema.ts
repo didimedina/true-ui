@@ -3,19 +3,29 @@ import { createStyles } from "@true-ui/styles/";
 import type {
   Pretty,
   RecipeCompoundVariant,
-  RecipeSelection,
+  // RecipeSelection,
   RecipeVariantRecord,
   SystemStyleObject,
 } from "@true-ui/styles/panda-codegen/types";
 
-type VariantDefinitionRecord = Record<any, string[]>;
+type StrictVariantRecord = Record<any, string[]>;
+
+type StringToBoolean<T> = T extends "true" | "false" ? boolean : T;
+
+export type VariantSelection<T extends StrictVariantRecord> =
+  keyof any extends keyof T
+    ? {}
+    : {
+        // [K in keyof T]?: StringToBoolean<keyof T[K]> | undefined
+        [K in keyof T]?: StringToBoolean<T[K][number]> | undefined;
+      };
 
 export type StrictVariants<
-  T extends RecipeVariantRecord = RecipeVariantRecord,
+  T extends StrictVariantRecord = StrictVariantRecord,
 > = {
   // Both Variants and DefaultVariants are required when using VariantDefinition
-  variants: VariantDefinitionRecord;
-  defaultVariants: RecipeSelection<T>;
+  variants: T;
+  defaultVariants: VariantSelection<T>;
 };
 
 export type StylesSchema<T extends StrictVariants> = {
@@ -51,21 +61,22 @@ Usage
 ================================ */
 
 // 1. Define your schema with const assertion to preserve literal types
-// const variants = {
+// const compVariants = {
 //   variants: {
 //     size: ["sm", "md", "lg"],
 //   },
 //   defaultVariants: {
-//     size: "md",
+//     size: "md", 
+//     // 🐞 Known issue:not getting autocomplete here, but works functionally
+//     // if you give a invalid value it will throw in the createStyles()
 //   },
 // } as const satisfies StrictVariants;
 
-// // 2. Extract the style schema from the variant definition
-// type MyCompStylesSchema = StylesSchema<typeof variants>;
+// 2. Extract the style schema from the variant definition
+// type MyCompStylesSchema = StylesSchema<typeof compVariants>;
 
-
-// // 3. Create your styles with the style schema using satisfies
-// //    and use the variantSchema for default variants.
+// 3. Create your styles with the style schema using satisfies
+//    and use the variantSchema for default variants.
 // const someStyles = createStyles({
 //   base: {
 //     px: "4",
@@ -78,7 +89,7 @@ Usage
 //     },
 //   },
 //   defaultVariants: {
-//     ...variants.defaultVariants,
+//     ...compVariants.defaultVariants,
 //   },
 //   compoundVariants: [
 //     {
@@ -88,6 +99,3 @@ Usage
 //   ],
 //   deprecated: false,
 // } satisfies MyCompStylesSchema);
-
-
-
