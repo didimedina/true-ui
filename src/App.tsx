@@ -1,7 +1,11 @@
 import { Alert } from "@true-ui/components/alert";
 import { Button } from "@true-ui/components/button";
+import { ButtonExample } from "@true-ui/components/button/examples";
 import { Field } from "@true-ui/components/field";
+import { Switch } from "@true-ui/components/switch";
+import { BasicSwitchExample } from "@true-ui/components/switch/examples";
 import { createStyles, mergeStyles } from "@true-ui/styles";
+
 
 const divStyles = createStyles({
   base: {
@@ -18,29 +22,29 @@ function App() {
   return (
     <>
       <div className={mergeStyles(divStyles, { bg: "base.1" })}>
-        <Alert.Root>
-          {/* <Alert.Icon/> */}
-          <Alert.Content>
-            <Alert.Title>Browser Update available</Alert.Title>
-            <Alert.Description>
-              For the best experience, please update your browser.
-            </Alert.Description>
-          </Alert.Content>
-        </Alert.Root>
-        <Button
-          styleVariant={{
-            size: "base",
-            weight: "outline",
-            color: "jade",
-          }}
+        <BasicSwitchExample styleVariant={{ size: "xs", color: "base" }} />
+        <BasicSwitchExample styleVariant={{ size: "sm", color: "grass" }} />
+        <BasicSwitchExample styleVariant={{ size: "base", color: "violet" }} />
+        <ButtonExample
+          styleVariant={{ size: "xs", color: "base", weight: "solid" }}
         >
-          Submit for Review
-        </Button>
-        <Field.Root>
-          <Field.Frame>
-            <input type="text" />
-          </Field.Frame>
-        </Field.Root>
+          Button
+        </ButtonExample>
+        <ButtonExample
+          styleVariant={{ size: "base", color: "base", weight: "subtle" }}
+        >
+          Button
+        </ButtonExample>
+        <ButtonExample
+          styleVariant={{ size: "xl", color: "pink", weight: "outline" }}
+        >
+          Button
+        </ButtonExample>
+        <ButtonExample
+          styleVariant={{ size: "sm", color: "violet", weight: "inline" }}
+        >
+          Button
+        </ButtonExample>
       </div>
     </>
   );

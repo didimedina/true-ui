@@ -72,7 +72,6 @@ const styles = cva({
   },
   defaultVariants: {
     ...variantSchema.defaultVariants,
-    size: "md",
   },
   compoundVariants: [
     {

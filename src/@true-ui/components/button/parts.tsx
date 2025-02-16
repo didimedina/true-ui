@@ -1,6 +1,14 @@
-import { el, type HTMLTrueElProps } from "@true-ui/components/factory";
+import { el, HTMLTrueElProps } from "@true-ui/components/factory";
 import { createStyles, type StyleVariantProps } from "@true-ui/styles";
 import { forwardRef } from "react";
+
+// ================================================
+//  Button
+// ================================================
+
+export type ButtonProps = HTMLTrueElProps<"button"> & {
+  styleVariant?: StyleVariantProps<typeof buttonStyles>;
+};
 
 const buttonStyles = createStyles({
   base: {
@@ -99,10 +107,6 @@ const buttonStyles = createStyles({
   },
 });
 
-export type ButtonProps = HTMLTrueElProps<"button"> & {
-  styleVariant?: StyleVariantProps<typeof buttonStyles>;
-};
-
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const { styleVariant, addStyles, ...rest } = props;
@@ -116,3 +120,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
+Button.displayName = "Button";

@@ -38,7 +38,7 @@ export type AddStylesProps = {
   addStyles?: RecursiveArrayWithUndefined<SystemStyleObject>;
 };
 
-type BaseProps = PolymorphicProps & AddStylesProps;
+export type BaseProps = PolymorphicProps & AddStylesProps;
 
 type JsxElements = {
   [E in keyof JSX.IntrinsicElements]: TrueElForwardRefComponent<E>;
@@ -71,7 +71,7 @@ function getRef(element: React.ReactElement) {
   );
 }
 
-const withBase = (Component: React.ElementType) => {
+export const withBase = (Component: React.ElementType) => {
   const Comp = memo(
     forwardRef<unknown, TrueElPropsWithRef<typeof Component>>((props, ref) => {
       const { asChild, children, className, addStyles, ...restProps } = props;

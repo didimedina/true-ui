@@ -1,8 +1,14 @@
-import { ark, type HTMLArkProps } from "@ark-ui/react";
-import { createStyles, mergeClasses } from "@true-ui/styles";
+"use client";
+
+import { el, type HTMLTrueElProps } from "@true-ui/components/factory";
+import { createStyles } from "@true-ui/styles";
 import { forwardRef } from "react";
 
-// Root
+// ================================================
+//  Root
+// ================================================
+export type RootProps = HTMLTrueElProps<"div">;
+
 const rootStyles = createStyles({
   base: {
     colorPalette: "base",
@@ -17,23 +23,21 @@ const rootStyles = createStyles({
   },
 });
 
-export type RootProps = HTMLArkProps<"div">;
-
 export const Root = forwardRef<HTMLDivElement, RootProps>((props, ref) => {
-  const { className, ...rest } = props;
+  const { addStyles, ...rest } = props;
 
   return (
-    <ark.div
-      ref={ref}
-      className={mergeClasses(rootStyles(), className)}
-      {...rest}
-    />
+    <el.div ref={ref} addStyles={[rootStyles.raw(), addStyles]} {...rest} />
   );
 });
 
 Root.displayName = "AlertRoot";
 
-// Content
+// ================================================
+//  Content
+// ================================================
+export type ContentProps = HTMLTrueElProps<"div">;
+
 const contentStyles = createStyles({
   base: {
     display: "flex",
@@ -42,16 +46,14 @@ const contentStyles = createStyles({
   },
 });
 
-export type ContentProps = HTMLArkProps<"div">;
-
 export const Content = forwardRef<HTMLDivElement, ContentProps>(
   (props, ref) => {
-    const { className, ...rest } = props;
+    const { addStyles, ...rest } = props;
 
     return (
-      <ark.div
+      <el.div
         ref={ref}
-        className={mergeClasses(contentStyles(), className)}
+        addStyles={[contentStyles.raw(), addStyles]}
         {...rest}
       />
     );
@@ -60,7 +62,11 @@ export const Content = forwardRef<HTMLDivElement, ContentProps>(
 
 Content.displayName = "AlertContent";
 
-// Description
+// ================================================
+//  Description
+// ================================================
+export type DescriptionProps = HTMLTrueElProps<"div">;
+
 const descriptionStyles = createStyles({
   base: {
     color: "colorPalette.12",
@@ -68,16 +74,14 @@ const descriptionStyles = createStyles({
   },
 });
 
-export type DescriptionProps = HTMLArkProps<"div">;
-
 export const Description = forwardRef<HTMLDivElement, DescriptionProps>(
   (props, ref) => {
-    const { className, ...rest } = props;
+    const { addStyles, ...rest } = props;
 
     return (
-      <ark.div
+      <el.div
         ref={ref}
-        className={mergeClasses(descriptionStyles(), className)}
+        addStyles={[descriptionStyles.raw(), addStyles]}
         {...rest}
       />
     );
@@ -86,7 +90,11 @@ export const Description = forwardRef<HTMLDivElement, DescriptionProps>(
 
 Description.displayName = "AlertDescription";
 
-// Icon
+// ================================================
+//  Icon
+// ================================================
+export type IconProps = HTMLTrueElProps<"svg">;
+
 const iconStyles = createStyles({
   base: {
     color: "colorPalette.12",
@@ -96,23 +104,21 @@ const iconStyles = createStyles({
   },
 });
 
-export type IconProps = HTMLArkProps<"svg">;
-
 export const Icon = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
-  const { className, ...rest } = props;
+  const { addStyles, ...rest } = props;
 
   return (
-    <ark.svg
-      ref={ref}
-      className={mergeClasses(iconStyles(), className)}
-      {...rest}
-    />
+    <el.svg ref={ref} addStyles={[iconStyles.raw(), addStyles]} {...rest} />
   );
 });
 
 Icon.displayName = "AlertIcon";
 
-// Title
+// ================================================
+//  Title
+// ================================================
+export type TitleProps = HTMLTrueElProps<"h5">;
+
 const titleStyles = createStyles({
   base: {
     color: "colorPalette.12",
@@ -121,18 +127,12 @@ const titleStyles = createStyles({
   },
 });
 
-export type TitleProps = HTMLArkProps<"h5">;
-
 export const Title = forwardRef<HTMLHeadingElement, TitleProps>(
   (props, ref) => {
-    const { className, ...rest } = props;
+    const { addStyles, ...rest } = props;
 
     return (
-      <ark.h5
-        ref={ref}
-        className={mergeClasses(titleStyles(), className)}
-        {...rest}
-      />
+      <el.h5 ref={ref} addStyles={[titleStyles.raw(), addStyles]} {...rest} />
     );
   }
 );

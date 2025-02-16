@@ -1,12 +1,6 @@
-import { Button } from "@true-ui/components/button";
+import { Button, ButtonProps } from "@true-ui/components/button";
+
+export type ButtonExampleProps = ButtonProps;
 
 // Regular Button
-export const GraySolidButtonExample = () => (
-  <Button
-    styleVariant={{
-      size: "base",
-      color: "base",
-      weight: "solid",
-    }}
-  >Click Me!</Button>
-);
+export const ButtonExample = (props: ButtonProps) => <Button {...props} />;

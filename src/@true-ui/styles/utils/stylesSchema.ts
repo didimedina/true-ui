@@ -1,12 +1,14 @@
-// import { cva } from "@true-ui/styles/panda-codegen/css";
-import { createStyles } from "@true-ui/styles/";
+// import { createStyles } from "@true-ui/styles/";
 import type {
   Pretty,
   RecipeCompoundVariant,
   // RecipeSelection,
-  RecipeVariantRecord,
+  // RecipeVariantRecord,
   SystemStyleObject,
 } from "@true-ui/styles/panda-codegen/types";
+
+// 🚧 WIP
+// [] make defaultVariants in strictVariants work with autocomplete / derive options from variants
 
 type StrictVariantRecord = Record<any, string[]>;
 
@@ -16,6 +18,7 @@ export type VariantSelection<T extends StrictVariantRecord> =
   keyof any extends keyof T
     ? {}
     : {
+        // 🚧 Known issue: this type is not referancing the variant keys properly.
         // [K in keyof T]?: StringToBoolean<keyof T[K]> | undefined
         [K in keyof T]?: StringToBoolean<T[K][number]> | undefined;
       };
@@ -60,23 +63,23 @@ export type StylesSchema<T extends StrictVariants> = {
 Usage
 ================================ */
 
-// 1. Define your schema with const assertion to preserve literal types
+// // 1. Define your schema with const assertion to preserve literal types
 // const compVariants = {
 //   variants: {
 //     size: ["sm", "md", "lg"],
 //   },
 //   defaultVariants: {
-//     size: "md", 
-//     // 🐞 Known issue:not getting autocomplete here, but works functionally
+//     size: "md",
+//     // 🚧 Known issue:not getting autocomplete here, but works functionally
 //     // if you give a invalid value it will throw in the createStyles()
 //   },
 // } as const satisfies StrictVariants;
 
-// 2. Extract the style schema from the variant definition
+// // 2. Extract the style schema from the variant definition
 // type MyCompStylesSchema = StylesSchema<typeof compVariants>;
 
-// 3. Create your styles with the style schema using satisfies
-//    and use the variantSchema for default variants.
+// // 3. Create your styles with the style schema using satisfies
+// //    and use the variantSchema for default variants.
 // const someStyles = createStyles({
 //   base: {
 //     px: "4",
