@@ -1,7 +1,10 @@
 // Do not replace with '@zag-js/react'
 import { composeRefs } from "@true-ui/components/utils/compose-refs";
-import { mergeClasses, mergeStyles } from "@true-ui/styles";
-import { type SystemStyleObject } from "@true-ui/styles/types";
+import {
+  type SystemStyleObject,
+  mergeClasses,
+  mergeStyles,
+} from "@true-ui/styles";
 import { mergeProps } from "@zag-js/core";
 import type React from "react";
 import {
@@ -20,6 +23,7 @@ import {
  * Original can be found here: https://github.com/chakra-ui/ark/blob/main/packages/react/src/components/factory.ts
  * TrueEl is the same as ark.div or primitive.div from Radix, accept it also has addStyles prop.
  * The factory allows you to create any native HTML element using the el.div pattern.
+ * the useBase() function can be used with any react component to add the addStyles prop and asChild prop.
  */
 
 type RecursiveArrayWithUndefined<T> =

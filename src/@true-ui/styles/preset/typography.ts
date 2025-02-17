@@ -109,7 +109,7 @@ export const textStyles: TextStyles = {
       lineHeight: "1.5",
     },
   },
-  md: {
+  base: {
     value: {
       fontSize: "1rem",
       lineHeight: "1.5",

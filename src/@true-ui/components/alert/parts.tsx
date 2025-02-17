@@ -99,8 +99,8 @@ const iconStyles = createStyles({
   base: {
     color: "colorPalette.12",
     flexShrink: "0",
-    width: "32px",
-    height: "32px",
+    width: "fit",
+    height: "fit",
   },
 });
 

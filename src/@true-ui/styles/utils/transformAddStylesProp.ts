@@ -1,4 +1,4 @@
-import ts from "typescript";
+import * as ts from "typescript";
 
 export function transformAddStylesProp(content: string): string {
   const sourceFile = ts.createSourceFile(

@@ -101,6 +101,7 @@ const controlStyles = createStyles({
     bg: "base.7",
     rounded: "full",
     justifyContent: "start",
+    transition: "background 0.2s ease-in-out",
     _checked: {
       bg: "colorPalette.9",
       justifyContent: "end",

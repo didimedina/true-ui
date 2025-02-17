@@ -43,12 +43,7 @@ const buttonStyles = createStyles({
       base: { colorPalette: "base" },
       amber: { colorPalette: "amber" },
       red: { colorPalette: "red" },
-      grass: { colorPalette: "grass" },
       violet: { colorPalette: "violet" },
-      pink: { colorPalette: "pink" },
-      indigo: { colorPalette: "indigo" },
-      cyan: { colorPalette: "cyan" },
-      jade: { colorPalette: "jade" },
     },
     weight: {
       solid: {
@@ -61,8 +56,8 @@ const buttonStyles = createStyles({
         shadow: "0 1px 4px 0 {colors.colorPalette.A5}",
         _hover: {
           bg: "colorPalette.10",
-          border: "1px solid",
-          borderColor: "colorPalette.A11",
+          boxSizing: "border-box",
+          backgroundClip: "padding-box",
         },
       },
       outline: {
@@ -74,6 +69,8 @@ const buttonStyles = createStyles({
         color: "colorPalette.11",
         shadow: "0 1px 2px 0 {colors.colorPalette.A3}",
         _hover: {
+          boxSizing: "border-box",
+          backgroundClip: "padding-box",
           bg: "colorPalette.3",
           borderColor: "colorPalette.A6",
         },
@@ -114,7 +111,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <el.button
         ref={ref}
-        addStyles={[buttonStyles.raw(styleVariant || {}), addStyles]}
+        addStyles={[buttonStyles.raw(styleVariant), addStyles]}
         {...rest}
       />
     );

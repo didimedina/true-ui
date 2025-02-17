@@ -4,6 +4,7 @@ import {
   type HTMLProps,
   type HTMLTrueElProps,
 } from "@true-ui/components/factory";
+import { focusNextTabbable } from "@true-ui/components/utils/focusNextTabable";
 import { createStyles, type StyleVariantProps } from "@true-ui/styles";
 import { ariaAttr, dataAttr } from "@zag-js/dom-query";
 import { mergeProps } from "@zag-js/react";
@@ -70,7 +71,10 @@ Root.displayName = "FieldRoot";
 //  Frame
 // ================================================
 
-export type FrameProps = HTMLTrueElProps<"div">;
+export type FrameProps = HTMLTrueElProps<"div"> & {
+  autoFocus?: boolean;
+  styleVariant?: StyleVariantProps<typeof frameStyles>;
+};
 
 const frameStyles = createStyles({
   base: {
@@ -79,8 +83,12 @@ const frameStyles = createStyles({
     display: "flex",
     alignItems: "center",
     colorPalette: "base",
+    "& :where(svg)": {
+      color: "colorPalette.10",
+    },
     w: "full",
     rounded: "4px",
+    transition: "background 0.2s ease-in-out",
     _selection: {
       bg: "colorPalette.A4",
     },
@@ -117,7 +125,7 @@ const frameStyles = createStyles({
           color: "colorPalette.A6",
         },
         _hover: { bg: "colorPalette.A4" },
-        _focusVisible: {
+        _focusWithin: {
           bg: "colorPalette.A4",
           _hover: { bg: "colorPalette.A4" },
         },
@@ -138,7 +146,7 @@ const frameStyles = createStyles({
 });
 
 export const Frame = forwardRef<HTMLDivElement, FrameProps>((props, ref) => {
-  const { addStyles, ...rest } = props;
+  const { styleVariant, autoFocus = false, addStyles, ...rest } = props;
   const field = useFieldContext();
   // ark doesn't export getControlProps() so we're essentially asking for the same contexts to recreate it
   const frameProps = useMemo(
@@ -166,34 +174,28 @@ export const Frame = forwardRef<HTMLDivElement, FrameProps>((props, ref) => {
   return (
     <el.div
       {...mergedProps}
-      addStyles={[frameStyles.raw(), addStyles]}
+      addStyles={[frameStyles.raw(styleVariant || {}), addStyles]}
       ref={ref}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          // Use the control ID from field context
-          const control = document.getElementById(field?.ids?.control);
-          if (control instanceof HTMLElement) control.focus();
-        }
-      }}
+      onClick={
+        autoFocus ? (e) => focusNextTabbable(e.currentTarget) : undefined
+      }
     />
   );
 });
 
 Frame.displayName = "FieldFrame";
 
-
 // ================================================
 //  Input
 // ================================================
 
-export type InputProps =
-  HTMLTrueElProps<"div"> & {
-    styleVariant?: StyleVariantProps<typeof inputStyles>;
-  };
+export type InputProps = HTMLTrueElProps<"div"> & {
+  styleVariant?: StyleVariantProps<typeof inputStyles>;
+};
 
 const inputStyles = createStyles({
   base: {
-      /* styles... */
+    /* styles... */
   },
 });
 
@@ -201,11 +203,11 @@ export const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const { styleVariant, addStyles, ...rest } = props;
 
   return (
-      <el.div
-        ref={ref}
-        addStyles={[inputStyles.raw(styleVariant || {}), addStyles]}
-        {...rest}
-      />
+    <el.div
+      ref={ref}
+      addStyles={[inputStyles.raw(styleVariant), addStyles]}
+      {...rest}
+    />
   );
 });
 
