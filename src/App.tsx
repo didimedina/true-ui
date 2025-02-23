@@ -1,4 +1,4 @@
-import { Alert } from "@true-ui/components/alert";
+import { Alert } from "@true-ui/components";
 import { Button } from "@true-ui/components/button";
 import { ButtonExample } from "@true-ui/components/button/examples";
 import { Field } from "@true-ui/components/field";
@@ -13,36 +13,50 @@ const divStyles = createStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    w: "100vw",
+    // w: "100vw",
+    width: "100%",
+    w: "full",
     h: "100vh",
     gap: "8px",
+    _hover: {
+      bg: "base.1",
+    },
+
+    _disabled: {
+      _hover: {},
+    },
   },
-}).raw();
+  variants: {
+    iconOnly: {
+      true: {},
+    },
+    size: {
+      sm: {},
+      md: {},
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+  compoundVariants: [
+    {
+      size: "sm",
+      iconOnly: true,
+      css: {},
+    },
+  ],
+});
 
 function App() {
   return (
     <>
-      <div className={mergeStyles(divStyles, { bg: "base.1" })}>
-        <NumberInputExample />
-        <FieldExample />
-        <BasicSwitchExample styleVariant={{ size: "xs", color: "base" }} />
-        <BasicSwitchExample styleVariant={{ size: "sm", color: "grass" }} />
-        <BasicSwitchExample styleVariant={{ size: "base", color: "violet" }} />
-        <ButtonExample
-          styleVariant={{ size: "base", color: "violet", weight: "outline" }}
+      <div className={divStyles({ size: "sm" })}>
+        <Button
+          styleVariant={{ size: "sm", color: "violet" }}
+          // addStyles={{ bg: "base.5" }}
         >
-          Button
-        </ButtonExample>
-        <ButtonExample
-          styleVariant={{ size: "base", color: "base", weight: "subtle" }}
-        >
-          Button
-        </ButtonExample>
-        <ButtonExample
-          styleVariant={{ size: "sm", color: "violet", weight: "inline" }}
-        >
-          Button
-        </ButtonExample>
+          Click me
+        </Button>
       </div>
     </>
   );

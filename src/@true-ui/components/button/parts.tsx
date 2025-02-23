@@ -16,6 +16,7 @@ const buttonStyles = createStyles({
     lineHeight: "none",
     fontWeight: "medium",
     whiteSpace: "nowrap",
+    // colorPalette: "base",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
@@ -40,7 +41,7 @@ const buttonStyles = createStyles({
       xl: { height: "48px", px: "20px", fontSize: "xl" },
     },
     color: {
-      base: { colorPalette: "base" },
+      // base: { colorPalette: "base" },
       amber: { colorPalette: "amber" },
       red: { colorPalette: "red" },
       violet: { colorPalette: "violet" },
