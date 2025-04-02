@@ -1,11 +1,6 @@
-import { Alert } from "@true-ui/components";
+import { AirplaneTakeoff } from "@phosphor-icons/react";
 import { Button } from "@true-ui/components/button";
-import { ButtonExample } from "@true-ui/components/button/examples";
 import { Field } from "@true-ui/components/field";
-import { FieldExample } from "@true-ui/components/field/_wip";
-import { NumberInputExample } from "@true-ui/components/number-input/_wip";
-import { Switch } from "@true-ui/components/switch";
-import { BasicSwitchExample } from "@true-ui/components/switch/examples";
 import { createStyles, mergeStyles } from "@true-ui/styles";
 
 const divStyles = createStyles({
@@ -51,12 +46,28 @@ function App() {
   return (
     <>
       <div className={divStyles({ size: "sm" })}>
-        <Button
-          styleVariant={{ size: "sm", color: "violet" }}
-          // addStyles={{ bg: "base.5" }}
+        <div
+          className={mergeStyles({
+            display: "flex",
+            alignItems: "start",
+            gap: "2",
+          })}
         >
-          Click me
-        </Button>
+          <Field.Root invalid styleVariant={{ weight: "outline" }}>
+            {/* <Field.Label>Email</Field.Label> */}
+            <Field.Frame autoFocus>
+              <AirplaneTakeoff size={20} weight="duotone" />
+              <Field.Input />
+            </Field.Frame>
+            {/* <Field.ErrorText>
+              Please enter a valid email address
+            </Field.ErrorText> */}
+            {/* <Field.HelperText>
+              Fill this in if you want to live longer
+            </Field.HelperText> */}
+          </Field.Root>
+          <Button styleVariant={{ weight: "subtle" }}>Submit</Button>
+        </div>
       </div>
     </>
   );

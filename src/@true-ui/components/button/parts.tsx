@@ -41,7 +41,7 @@ const buttonStyles = createStyles({
       xl: { height: "48px", px: "20px", fontSize: "xl" },
     },
     color: {
-      // base: { colorPalette: "base" },
+      base: { colorPalette: "base" },
       amber: { colorPalette: "amber" },
       red: { colorPalette: "red" },
       violet: { colorPalette: "violet" },
